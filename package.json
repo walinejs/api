@@ -1,0 +1,31 @@
+{
+  "name": "@waline/api",
+  "version": "1.0.0",
+  "description": "api client for waline",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^8.3.2",
+    "rollup": "^2.71.0",
+    "typescript": "^4.6.3"
+  },
+  "scripts": {
+    "build": "rollup --config=rollup.config.js",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walinejs/api.git"
+  },
+  "keywords": [
+    "waline",
+    "api"
+  ],
+  "author": "lizheming<i@imnerd.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/walinejs/api/issues"
+  },
+  "homepage": "https://github.com/walinejs/api#readme"
+}

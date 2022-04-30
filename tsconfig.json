@@ -1,0 +1,16 @@
+{
+  "include": [ "**/*" ],
+  "exclude": [ "./dist" ],
+  "compilerOptions": {
+    "target": "ESNext",
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationDir": "./",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,  
+    "skipLibCheck": true
+  }
+}
