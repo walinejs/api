@@ -34,6 +34,6 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface GetUserResponse extends BasicResponse{
+export interface GetUserResponse extends Required<BasicResponse> {
   data: User;
 }

@@ -52,9 +52,7 @@ export interface GetAdminListRequest {
   page?: number;
 }
 
-export interface GetAdminListResponse {
-  errno: number;
-  errmsg: string;
+export interface GetAdminListResponse extends Required<BasicResponse> {
   data: AdminList;
 }
 
@@ -92,7 +90,7 @@ export interface PostCommentRequest {
   at?: string;
 }
 
-export interface PostCommentResponse extends BasicResponse {
+export interface PostCommentResponse extends Required<BasicResponse> {
   data: Omit<Comment, 'children'>
 }
 

@@ -1,6 +1,7 @@
-import { CommentId, GetAdminListRequest, GetAdminListResponse, GetCountRequest, GetCountResponse, GetListRequest, GetListResponse, GetRecentCommentRequest, GetRecentCommentResponse, GetUserResponse, LoginRequest, PostCommentRequest, PostCommentResponse, RegisterUserRequest, UpdateCommentRequest, UpdateUserRequest, WalineAPIOptions } from "./types";
+import { BasicResponse, CommentId, GetAdminListRequest, GetAdminListResponse, GetCountRequest, GetCountResponse, GetListRequest, GetListResponse, GetRecentCommentRequest, GetRecentCommentResponse, GetUserResponse, LoginRequest, PostCommentRequest, PostCommentResponse, RegisterUserRequest, UpdateCommentRequest, UpdateUserRequest, WalineAPIOptions } from "./types";
 import { fetchFactory, qs } from "./util";
 
+type BaseResponse = Required<BasicResponse>;
 export default function(options: WalineAPIOptions) {
   const request = fetchFactory(options);
   return {
@@ -27,7 +28,7 @@ export default function(options: WalineAPIOptions) {
         });
       },
       update(data: UpdateCommentRequest) {
-        return request('/comment', {
+        return request<BaseResponse>('/comment', {
           method: 'PUT',
           headers: {
             'content-type': 'application/json',
@@ -36,7 +37,7 @@ export default function(options: WalineAPIOptions) {
         });
       },
       delete(commentId: CommentId) {
-        return request('/comment/' + commentId, { method: 'DELETE' });
+        return request<BaseResponse>('/comment/' + commentId, { method: 'DELETE' });
       }
     },
     user: {
@@ -44,7 +45,7 @@ export default function(options: WalineAPIOptions) {
         return request<GetUserResponse>('/token');
       },
       register(params: RegisterUserRequest) {
-        return request('/user', {
+        return request<BaseResponse>('/user', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
@@ -53,7 +54,7 @@ export default function(options: WalineAPIOptions) {
         });
       },
       update(params: UpdateUserRequest) {
-        return request('/user', {
+        return request<BaseResponse>('/user', {
           method: 'PUT',
           headers: {
             'content-type': 'application/json',
@@ -62,7 +63,7 @@ export default function(options: WalineAPIOptions) {
         });
       },
       login(params: LoginRequest) {
-        return request('/token', {
+        return request<BaseResponse>('/token', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
@@ -71,7 +72,7 @@ export default function(options: WalineAPIOptions) {
         });
       },
       logout() {
-        return request('/token', { method: 'DELETE' });
+        return request<BaseResponse>('/token', { method: 'DELETE' });
       }
     }
   }

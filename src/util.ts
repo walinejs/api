@@ -6,7 +6,7 @@ export function fetchFactory(factoryOpt: WalineAPIOptions) {
     baseUrl = baseUrl.replace(/\/+$/, '');
   }
 
-  return async function request<T extends BasicResponse>(input: RequestInfo, init?: RequestInit) {
+  return async function request<T extends BasicResponse>(input: RequestInfo, init?: RequestInit): Promise<T extends { errno: number; } ? T["data"] : T> {
     input = baseUrl + input;
 
     if (factoryOpt.token) {
@@ -21,11 +21,11 @@ export function fetchFactory(factoryOpt: WalineAPIOptions) {
     }
 
     const response = await fetch(input, init);
-    const resp: T = await response.json();
+    const resp = await response.json();
     if (!resp.hasOwnProperty('errno')) {
       return resp;
     } else if (resp.errno) {
-      throw new Error(resp.errmsg);
+      throw new Error(typeof resp.errmsg === 'string' ? resp.errmsg : JSON.stringify(resp.errmsg));
     }
 
     return resp.data;
